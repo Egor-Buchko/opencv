@@ -40,10 +40,10 @@ def land_wait():
 fire_arr = []
 hurt_arr = []
 # hsv-диапазоны для распознования возгорания, пострадавшего и зоны посадки
-yellow_min, yellow_max = (30, 189, 239),(31, 190, 240)
-red_min, red_max = (0, 179, 239),(4, 189, 240)
-green_min, green_max = (120, 188, 239), (121, 189, 240)
-blue_min, blue_max = (60, 187, 239), (61, 188, 240)
+yellow_min, yellow_max = (25, 78, 129), (42, 172, 177)
+red_min, red_max = (175, 109, 175), (183, 157, 226)
+green_min, green_max = (59, 88, 136), (82, 146, 178)
+blue_min, blue_max = (86, 127, 123), (138, 249, 207)
 # image topic для отладки
 fire_detect = rospy.Publisher("/fire_detect", Image, queue_size=1)
 hurt_detect = rospy.Publisher("/hurt_detect", Image, queue_size=1)
@@ -162,6 +162,12 @@ mask_now = (red_min, red_max)
 regulation()
 navigate_wait(z=2, frame_id='aruco_11', auto_arm=True)
 mask_now = (yellow_min, yellow_max)
+regulation()
+navigate_wait(z=2, frame_id='aruco_11', auto_arm=True)
+mask_now = (green_min, green_max)
+regulation()
+navigate_wait(z=2, frame_id='aruco_11', auto_arm=True)
+mask_now = (blue_min, blue_max)
 regulation()
 navigate_wait(x=xstart ,y=ystart ,z=2, frame_id='aruco_map', auto_arm=True)
 land_wait()
